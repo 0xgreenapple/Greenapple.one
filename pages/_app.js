@@ -7,7 +7,7 @@ import {
   redTheme,
   yellowTheme,
   pinkTheme,
-} from "../themeConfig"; 
+} from "../ThemeConfig"; 
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "../styles/GlobalStyles";
 
