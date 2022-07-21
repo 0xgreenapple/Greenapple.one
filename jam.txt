@@ -1,0 +1,285 @@
+import {
+  RoomProvider,
+  useBroadcastEvent,
+  useEventListener,
+  useMyPresence,
+  useOthers,
+} from "@liveblocks/react";
+import React, { useState, useCallback, useEffect } from "react";
+import { CursorWithChat } from "../components/Cursor";
+import styled from "styled-components";
+import Image from "next/image";
+import Jampageseo from "../components/Jampageseo";
+
+const COLORS = ["#DC2626", "#D97706", "#059669", "#7C3AED", "#DB2777"];
+
+const CursorMode = {
+  Hidden: 1,
+  Chat: 2,
+  ReactionSelector: 3,
+  Reaction: 4,
+};
+
+function LiveCursorChatReactions() {
+  const others = useOthers();
+  const [myPresence, updateMyPresence] = useMyPresence();
+  const broadcast = useBroadcastEvent();
+  const [state, setState] = useState({ mode: CursorMode.Hidden });
+
+  // console.log(myPresence);
+  let cursor = myPresence.cursor;
+  useEffect(() => {
+    function onKeyUp(e) {
+      if (e.key === "/") {
+        setState({ mode: CursorMode.Chat, previousMessage: null, message: "" });
+      } else if (e.key === "Escape") {
+        updateMyPresence({ message: "" });
+        setState({ mode: CursorMode.Hidden });
+      }
+    }
+
+    window.addEventListener("keyup", onKeyUp);
+
+    return () => {
+      window.removeEventListener("keyup", onKeyUp);
+    };
+  }, [updateMyPresence]);
+
+  return (
+    <>
+      <div
+        style={{
+          cursor:
+            state.mode === CursorMode.Chat
+              ? "none"
+              : "url(nextcursor.png) 0 0, auto",
+          position: "absolute",
+          top: 0,
+          right: 0,
+          bottom: 0,
+          left: 0,
+        }}
+        onPointerMove={(event) => {
+          if (cursor == null || state.mode !== CursorMode.ReactionSelector) {
+            updateMyPresence({
+              cursor: {
+                x: Math.round(event.clientX),
+                y: Math.round(event.clientY),
+              },
+            });
+          }
+        }}
+        onPointerLeave={() => {
+          setState({
+            mode: CursorMode.Hidden,
+          });
+          updateMyPresence({
+            cursor: null,
+          });
+        }}
+      >
+        {cursor && (
+          <div
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              transform: `translateX(${cursor.x}px) translateY(${cursor.y}px)`,
+            }}
+          >
+            {state.mode === CursorMode.Chat && (
+              <>
+                <Image src="/nextcursor.png" width={20} height={20} />
+                <div
+                  style={{
+                    position: "absolute",
+                    top: 20,
+                    left: 20,
+                  }}
+                  onKeyUp={(e) => e.stopPropagation()}
+                >
+                  {state.previousMessage && <div>{state.previousMessage}</div>}
+                  <ChatInput
+                    style={{
+                      backgroundColor: "blue",
+                      borderRadius: 20,
+                      border: "none",
+                      paddingLeft: 15,
+                      paddingRight: 15,
+                      height: 40,
+                      alignItems: "center",
+                      fontSize: 13,
+                      color: "white",
+                    }}
+                    autoFocus={true}
+                    onChange={(e) => {
+                      updateMyPresence({ message: e.target.value });
+                      setState({
+                        mode: CursorMode.Chat,
+                        previousMessage: null,
+                        message: e.target.value,
+                      });
+                    }}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        // setState({
+                        //   mode: CursorMode.Chat,
+                        //   previousMessage: state.message,
+                        //   message: "",
+                        // });
+                      } else if (e.key === "Escape") {
+                        setState({
+                          mode: CursorMode.Hidden,
+                        });
+                      }
+                    }}
+                    placeholder={state.previousMessage ? "" : "Say something…"}
+                    value={state.message}
+                    maxLength={50}
+                  />
+                </div>
+              </>
+            )}
+          </div>
+        )}
+        {others.map(({ connectionId, presence }) => {
+          if (presence == null || !presence.cursor) {
+            return null;
+          }
+          return (
+            <CursorWithChat
+              key={connectionId}
+              color={COLORS[connectionId % COLORS.length]}
+              x={presence.cursor.x}
+              y={presence.cursor.y}
+              message={presence.message}
+              size={20}
+            />
+          );
+        })}
+      </div>
+    </>
+  );
+}
+
+function InstructionsSection() {
+  return (
+    <InstructionsContainer>
+      <Instructions>
+        <Card>
+          Chat <Symbol>/</Symbol>
+        </Card>
+        <Card>
+          Escape <Symbol>ESC</Symbol>
+        </Card>
+      </Instructions>
+    </InstructionsContainer>
+  );
+}
+
+function Footer() {
+  const others = useOthers().toArray();
+  return (
+    <FooterContainer>
+      <FooterContent>
+        <img src="/nextcursor.png" /> <CountSpan>{others.length + 1}</CountSpan>{" "}
+        here
+      </FooterContent>
+    </FooterContainer>
+  );
+}
+
+export default function Room() {
+  return (
+    <RoomProvider
+      id="jam-room"
+      defaultPresence={() => ({
+        cursor: null,
+        message: "",
+      })}
+    >
+      <Jampageseo />
+      <BgLayout>
+        <InstructionsSection />
+        <LiveCursorChatReactions />
+        <Footer />
+      </BgLayout>
+    </RoomProvider>
+  );
+}
+
+const BgLayout = styled.div`
+  position: relative;
+  z-index: 1;
+  background-color: #000;
+  --dot-size: 1px;
+  --dot-space: 22px;
+  background: linear-gradient(90deg, #000 21px, transparent 1%) 50%,
+    linear-gradient(#000 21px, transparent 1%) 50%, #444;
+  background-size: var(--dot-space) var(--dot-space);
+  color: #fff;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+`;
+
+const ChatInput = styled.input`
+  &::placeholder {
+    color: white;
+    opacity: 0.6;
+  }
+`;
+
+const FooterContent = styled.div`
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  color: #afafaf;
+  width: 100%;
+`;
+
+const CountSpan = styled.span`
+  font-weight: 600;
+  padding: 0 10px;
+  color: white;
+`;
+
+const FooterContainer = styled.div`
+  position: fixed;
+  left: 50%;
+  bottom: 20px;
+  transform: translate(-50%, -50%);
+  margin: 0 auto;
+`;
+
+const InstructionsContainer = styled.div``;
+
+const Instructions = styled.div`
+  display: flex;
+  flex-direction: row;
+  /* justify-content: center; */
+  /* align-items: center; */
+`;
+
+const Card = styled.div`
+  padding: 10px 10px;
+  color: white;
+  display: flex;
+  align-items: center;
+  font-size: 13px;
+  border-radius: 10px;
+  /* border: solid 1px #eeeeee; */
+  margin: 5px;
+`;
+
+const Symbol = styled.span`
+  background-color: #afafaf;
+  color: #000;
+  font-size: 10px;
+  padding: 0 2px;
+  margin: 0 5px;
+  border-radius: 2px;
+  font-family: monospace;
+  font-weight: 700;
+`;
