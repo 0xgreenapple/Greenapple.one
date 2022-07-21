@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import ThemeChanger from "../components/themechanger";
+
 
 import Landing from '../components/Landing'
 
