@@ -179,8 +179,9 @@ label {
   justify-content: center;
   flex-direction: column;
   align-items: center;
-@media screen and (max-width: 768px) {
+  @media screen and (max-width: 768px) {
     transform: scale(.75);
+    margin-top: 10px;
   }
   .calc {
     display: flex;
@@ -377,6 +378,10 @@ label {
         &:hover{
           box-shadow: 1px 1px 0px #000000;
           transform: scale(1.2);
+          @media screen and (max-width: 768px) {
+              box-shadow: 1px 1px 0px #000000;
+          transform: scale(1);
+            }
         }
     }
   }
