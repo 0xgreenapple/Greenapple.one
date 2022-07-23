@@ -9,7 +9,7 @@ export const GlobalStyles = createGlobalStyle`
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-top: 24px;
+    padding: 10px;
     .plbtn{
       margin-left: 20px;
       color: #000;
