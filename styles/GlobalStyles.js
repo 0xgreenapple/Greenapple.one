@@ -5,14 +5,42 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
   }
+  .playground_btn{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    margin-top: 24px;
+    .plbtn{
+      margin-left: 20px;
+      color: #000;
+      margin-right: 40px;
+      background-color: #79B5E1;
+      display: inline-flex;
+      border: 1px solid black;
+      border-radius: 16px;
+      box-shadow: 3px 3px 0px #000000;
+      font-size: 11px;
+      letter-spacing: 1px;
+      font-weight: 900;
+      line-height: 32px;
+      padding-left: 12px;
+      padding-right: 12px;
+      transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
+      &:hover {
+          box-shadow: rgb(0 0 0) 1px 1px 0px;
+        }
+
+    }
+  }
   .themeselector {
     display: inline-flex;
-    margin-top: 30px;
     border: 1px solid black;
     border-radius: 16px;
+    box-shadow: 3px 3px 0px #000000;
      @media screen and (max-width: 768px) {
             margin-left: 24px;
         }
+        
     .activecolor {
         background: ${({ theme }) => theme.toggleBG};
      
@@ -89,6 +117,10 @@ export const GlobalStyles = createGlobalStyle`
           }
         }
     }
+     &:hover {
+                box-shadow: rgb(0 0 0) 1px 1px 0px;
+            }
+
     
     
   }

@@ -1,5 +1,6 @@
 import "../styles/main.scss";
 import { useState } from "react";
+import Head from "next/head";
 import {
   lightTheme,
   darkTheme,
@@ -10,6 +11,8 @@ import {
 } from "../ThemeConfig"; 
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "../styles/GlobalStyles";
+import Link from "next/link";
+
 
 function getThemeType(theme) {
   if (theme == 'light'){
@@ -23,6 +26,7 @@ function getThemeType(theme) {
 function MyApp({ Component, pageProps }) {
     // const [theme, setTheme] = useState("light");
     const [theme, setTheme] = useState(lightTheme);
+
     
     const toggleTheme = (col) => {
         switch (col) {
@@ -52,61 +56,72 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
-    <ThemeProvider theme={theme}>
-      <GlobalStyles />
-      <head>
-        <meta
-          content="width=device-width, initial-scale=1"
-          name="viewport"
-        ></meta>
-        <title>Green apple</title>
-      </head>
-      <div className="themeselector">
-        <div className="activecolor">
-          <h4>colour</h4>
-          <div className="btngroup">
-            <button
-              className="light"
-              onClick={() => {
-                toggleTheme("light");
-              }}
-            ></button>
-            <button
-              className="dark"
-              onClick={() => {
-                toggleTheme("dark");
-              }}
-            ></button>
-            <button
-              className="red"
-              onClick={() => {
-                toggleTheme("red");
-              }}
-            ></button>
-            <button
-              className="blue"
-              onClick={() => {
-                toggleTheme("blue");
-              }}
-            ></button>
-            <button
-              className="yellow"
-              onClick={() => {
-                toggleTheme("yellow");
-              }}
-            ></button>
-            <button
-              className="pink"
-              onClick={() => {
-                toggleTheme("pink");
-              }}
-            ></button>
-          </div>
-        </div>
-      </div>
+      <ThemeProvider theme={theme}>
+        <GlobalStyles />
 
-      <Component {...pageProps} />
-    </ThemeProvider>
+        <Head>
+          <meta name="viewport" content="width=device-width, initial-scale=1" />
+          <meta charSet="utf-8" />
+          <meta
+            property="og:title"
+            content="average green apple enjoyer"
+            key="ogtitle"
+          />
+          <meta property="og:description" content="green apple?" key="ogdesc" />
+          <meta property="og:image" content="images/preview.png" key="ogimg" />
+          <title>green apple</title>
+        </Head>
+
+        <div className="playground_btn container">
+          <div className="themeselector">
+            <div className="activecolor">
+              <h4>colour</h4>
+              <div className="btngroup">
+                <button
+                  className="light"
+                  onClick={() => {
+                    toggleTheme("light");
+                  }}
+                ></button>
+                <button
+                  className="dark"
+                  onClick={() => {
+                    toggleTheme("dark");
+                  }}
+                ></button>
+                <button
+                  className="red"
+                  onClick={() => {
+                    toggleTheme("red");
+                  }}
+                ></button>
+                <button
+                  className="blue"
+                  onClick={() => {
+                    toggleTheme("blue");
+                  }}
+                ></button>
+                <button
+                  className="yellow"
+                  onClick={() => {
+                    toggleTheme("yellow");
+                  }}
+                ></button>
+                <button
+                  className="pink"
+                  onClick={() => {
+                    toggleTheme("pink");
+                  }}
+                ></button>
+              </div>
+            </div>
+          </div>
+          <Link href="/playground">
+            <a className="plbtn">playground</a>
+          </Link>
+        </div>
+        <Component {...pageProps} />
+      </ThemeProvider>
     </>
   );
 }
