@@ -7,10 +7,10 @@ export default function calc() {
   !["+", "-", "*", "%"].includes();
 
   const changevalue = (value) => {
-    if (temp.length === 21) {
-      document.getElementById("screen").value = 0;
-      temp = "";
-      return;
+    if (value !== 'ac' && temp.length === 20) {
+      document.getElementById("screen").value = temp;
+      temp = temp;
+      return
     }
 
     if (value === "=") {
@@ -24,7 +24,11 @@ export default function calc() {
         if (value1 === Infinity) {
           document.getElementById("screen").value = value1;
           temp = "";
-        } else {
+        } else if (value1 === undefined){
+            document.getElementById("screen").value = 0;
+            temp = "";
+        }
+        else {
           document.getElementById("screen").value = value1;
           temp = `${value1}`;
         }
@@ -32,8 +36,8 @@ export default function calc() {
         document.getElementById("screen").value = temp;
       }
     } else if (value === "ac") {
-      document.getElementById("screen").value = 0;
-      temp = "";
+      document.getElementById("screen").value = temp.slice(0, - 1);
+      temp = temp.slice(0,-1);
     } else {
       if (temp.slice(-1) === value && temp.slice(-1) === value) {
         document.getElementById("screen").value = temp;
