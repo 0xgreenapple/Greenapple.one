@@ -6,81 +6,90 @@ export default function calc() {
   !["+", "-", "*", "%"].includes();
 
   const changevalue = (value) => {
-    if (value !== 'ac' && temp.length === 20) {
-      var result =temp
-      if (value === '='){
-        result = eval(temp)
+    try {
+      if (value !== "ac" && temp.length === 20) {
+        var result = temp;
+        if (value === "=") {
         
-      }
-      console.log(value)
-      console.log(result)
-      console.log(temp)
-      document.getElementById("screen").value = result;
-      temp = String(result);
-      return
-    }
+          if (!["*", "/"].includes(temp.slice(-1))) {
 
-    if (value === "=") {
-      if (["*", "/"].includes(temp.charAt(0))) {
-        document.getElementById("screen").value = 0;
-        temp = "";
+            result = eval(temp);
+          }
+        }
+        
+        document.getElementById("screen").value = result;
+        temp = String(result);
         return;
       }
-      if (!["+", "-", "*", "/","."].includes(temp.slice(-1))) {
-        var value1 = eval(temp);
-        if (value1 === Infinity) {
-          document.getElementById("screen").value = value1;
+
+      if (value === "=") {
+        if (["*", "/"].includes(temp.charAt(0))) {
+          document.getElementById("screen").value = 0;
           temp = "";
-        } else if (value1 === undefined){
+          comma = false;
+          return;
+        }
+        if (!["+", "-", "*", "/", "."].includes(temp.slice(-1))) {
+          var value1 = eval(temp);
+          if (value1 === Infinity) {
+            document.getElementById("screen").value = value1;
+            temp = "";
+            comma = false;
+          } else if (value1 === undefined) {
             document.getElementById("screen").value = 0;
             temp = "";
+            comma = false;
+          } else {
+            document.getElementById("screen").value = value1;
+            temp = `${value1}`;
+          }
+        } else {
+          document.getElementById("screen").value = temp;
         }
-        else {
-          document.getElementById("screen").value = value1;
-          temp = `${value1}`;
+      } else if (value === "ac") {
+        if (temp.slice(-1) === ".") {
+          comma = false;
         }
+        document.getElementById("screen").value = temp.slice(0, -1);
+        temp = temp.slice(0, -1);
       } else {
-        document.getElementById("screen").value = temp;
-      }
-    } else if (value === "ac") {
-      document.getElementById("screen").value = temp.slice(0, - 1);
-      temp = temp.slice(0,-1);
-    } else {
-      if (temp.slice(-1) === value && temp.slice(-1) === value) {
-        document.getElementById("screen").value = temp;
-      } else {
-        if (
-          ["*", "/", "-", "+"].includes(value) &&
-          ["*", "/", "-", "+"].includes(temp.slice(-1))
-        ) {
+        if (temp.slice(-1) === value && temp.slice(-1) === value) {
           document.getElementById("screen").value = temp;
         } else {
-          if (value === '.'){
-            if (!comma) {
-              temp = temp + value;
-              document.getElementById("screen").value = temp;
-              comma = true
-            }
-            else{
-              temp = temp;
-              document.getElementById("screen").value = temp;
+          if (
+            ["*", "/", "-", "+"].includes(value) &&
+            ["*", "/", "-", "+"].includes(temp.slice(-1))
+          ) {
+            document.getElementById("screen").value = temp;
+          } else {
+            if (value === ".") {
+              if (!comma) {
+                temp = temp + value;
+                document.getElementById("screen").value = temp;
+                comma = true;
+              } else {
+                temp = temp;
+                document.getElementById("screen").value = temp;
+              }
+            } else {
+              if (["*", "/", "-", "+"].includes(value)) {
+                temp = temp + value;
+                document.getElementById("screen").value = temp;
+                comma = false;
+              } else {
+                temp = temp + value;
+                document.getElementById("screen").value = temp;
+              }
             }
           }
-          else{
-            if (["*", "/", "-", "+"].includes(value)){
-              temp = temp + value;
-              document.getElementById("screen").value = temp;
-              comma = false;
-            } 
-            else{
-               temp = temp + value;
-               document.getElementById("screen").value = temp;
-            }
-          }
-          
         }
       }
-    }
+    } catch (EvalError) {
+      document.getElementById("screen").value = "syntex error";
+      temp=""
+      comma = false;
+    } 
+
   };
 
   return (

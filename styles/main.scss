@@ -449,6 +449,8 @@ label {
     }
   h1{
     font-size: 200px;
+    cursor: move;
+    z-index: 9999;
     @media screen and (max-width: 768px) {
         margin: 0;
         font-size: 80px;
