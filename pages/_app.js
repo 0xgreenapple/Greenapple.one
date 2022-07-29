@@ -68,7 +68,7 @@ function MyApp({ Component, pageProps }) {
             key="ogtitle"
           />
           <meta property="og:description" content="green apple?" key="ogdesc" />
-          <meta property="og:image" content="images/preview.png" key="ogimg" />
+          <meta property="og:image" content="https://greenapple.one/images/preview.png" key="ogimg" />
           <title>green apple</title>
         </Head>
 

@@ -2,14 +2,21 @@
 import Footer from "./footer";
 export default function calc() {
   var temp = "";
-  var optvalue = 0;
-  var v = "";
+  var comma = false;
   !["+", "-", "*", "%"].includes();
 
   const changevalue = (value) => {
     if (value !== 'ac' && temp.length === 20) {
-      document.getElementById("screen").value = temp;
-      temp = temp;
+      var result =temp
+      if (value === '='){
+        result = eval(temp)
+        
+      }
+      console.log(value)
+      console.log(result)
+      console.log(temp)
+      document.getElementById("screen").value = result;
+      temp = String(result);
       return
     }
 
@@ -19,7 +26,7 @@ export default function calc() {
         temp = "";
         return;
       }
-      if (!["+", "-", "*", "/"].includes(temp.slice(-1))) {
+      if (!["+", "-", "*", "/","."].includes(temp.slice(-1))) {
         var value1 = eval(temp);
         if (value1 === Infinity) {
           document.getElementById("screen").value = value1;
@@ -48,8 +55,29 @@ export default function calc() {
         ) {
           document.getElementById("screen").value = temp;
         } else {
-          temp = temp + value;
-          document.getElementById("screen").value = temp;
+          if (value === '.'){
+            if (!comma) {
+              temp = temp + value;
+              document.getElementById("screen").value = temp;
+              comma = true
+            }
+            else{
+              temp = temp;
+              document.getElementById("screen").value = temp;
+            }
+          }
+          else{
+            if (["*", "/", "-", "+"].includes(value)){
+              temp = temp + value;
+              document.getElementById("screen").value = temp;
+              comma = false;
+            } 
+            else{
+               temp = temp + value;
+               document.getElementById("screen").value = temp;
+            }
+          }
+          
         }
       }
     }
