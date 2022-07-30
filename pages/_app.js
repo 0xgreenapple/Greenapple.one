@@ -13,6 +13,8 @@ import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "../styles/GlobalStyles";
 import Link from "next/link";
 import Seo from "../components/Seo";
+import { GoogleAnalytics } from "nextjs-google-analytics";
+
 
 function getThemeType(theme) {
   if (theme == 'light'){
@@ -56,10 +58,11 @@ function MyApp({ Component, pageProps }) {
 
   return (
     <>
+      <GoogleAnalytics />
       <ThemeProvider theme={theme}>
         <GlobalStyles />
 
-        <Seo/>
+        <Seo />
         <div className="playground_btn container">
           <div className="themeselector">
             <div className="activecolor">
@@ -108,6 +111,7 @@ function MyApp({ Component, pageProps }) {
             <a className="plbtn">playground</a>
           </Link>
         </div>
+
         <Component {...pageProps} />
       </ThemeProvider>
     </>
