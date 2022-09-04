@@ -18,9 +18,11 @@ export default function playground() {
                 <Link href="/playground/calculator">
                   <a>calculator</a>
                 </Link>
+                <Link href="/playground/gameoflife">
+                  <a className="gameoflife">Game of Life</a>
+                </Link>
               </div>
             </div>
-            <Footer/>
           </div>
         </div>
       </section>

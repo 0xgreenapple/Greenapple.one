@@ -13,7 +13,6 @@ export const GlobalStyles = createGlobalStyle`
     .plbtn{
       margin-left: 20px;
       color: #000;
-      margin-right: 40px;
       background-color: #79B5E1;
       display: inline-flex;
       border: 1px solid black;

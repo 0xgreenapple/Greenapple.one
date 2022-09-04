@@ -1,11 +1,11 @@
-import Calc from "../../components/calc";
+import GameOfLife from "../../components/gameoflife";
 import Footer from "../../components/footer";
 
 export default function playground() {
   return (
     <>
       <section>
-        <Calc />
+        <GameOfLife />
       </section>
     </>
   );

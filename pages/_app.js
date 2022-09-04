@@ -1,5 +1,5 @@
 import "../styles/main.scss";
-import { useState } from "react";
+import { useState ,useEffect} from "react";
 import Head from "next/head";
 import {
   lightTheme,
@@ -26,35 +26,39 @@ function getThemeType(theme) {
   }
 }
 function MyApp({ Component, pageProps }) {
-    // const [theme, setTheme] = useState("light");
-    const [theme, setTheme] = useState(lightTheme);
-
-    
-    const toggleTheme = (col) => {
-        switch (col) {
-          case "dark":
-            setTheme(darkTheme);
-            break;
-          case "red":
-            setTheme(redTheme);
-            break;
-          case "blue":
-            setTheme(blueTheme);
-            break;
-          case "yellow":
-            setTheme(yellowTheme);
-            break;
-          case "pink":
-            setTheme(pinkTheme);
-            break;
-          case "light":
-          default:
-            setTheme(lightTheme);
-            break;
-        }
-        // theme == 'light' ? setTheme('dark') : setTheme('light')
+  // const [theme, setTheme] = useState("light");
+  const [theme, setTheme] = useState(lightTheme);
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      const loader = document.getElementById("globalLoader");
+      if (loader) loader.style.display = "none";
     }
+  }, []);
   
+  const toggleTheme = (col) => {
+    switch (col) {
+      case "dark":
+        setTheme(darkTheme);
+        break;
+      case "red":
+        setTheme(redTheme);
+        break;
+      case "blue":
+        setTheme(blueTheme);
+        break;
+      case "yellow":
+        setTheme(yellowTheme);
+        break;
+      case "pink":
+        setTheme(pinkTheme);
+        break;
+      case "light":
+      default:
+        setTheme(lightTheme);
+        break;
+    }
+    // theme == 'light' ? setTheme('dark') : setTheme('light')
+  };
 
   return (
     <>
@@ -107,8 +111,12 @@ function MyApp({ Component, pageProps }) {
               </div>
             </div>
           </div>
+
           <Link href="/playground">
             <a className="plbtn">playground</a>
+          </Link>
+          <Link href="/">
+            <a className="plbtn">home</a>
           </Link>
         </div>
 
