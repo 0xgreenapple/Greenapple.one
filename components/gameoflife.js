@@ -138,8 +138,9 @@ export default function gameoflife() {
 
     // Start the first frame request
 
-    window.requestAnimationFrame(init);
-  }
+setTimeout(() => {
+  requestAnimationFrame(init);
+}, 1000 / 10);  }
 
   function clear(context, canvas) {
     context.fillStyle = "black";
