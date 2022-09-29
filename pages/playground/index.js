@@ -1,9 +1,10 @@
 import Calc from "../../components/calc";
 import Link from "next/link";
 import Footer from "../../components/footer";
+
+
+//playground
 export default function playground() {
-
-
   return (
     <>
       <section>
@@ -19,7 +20,10 @@ export default function playground() {
                   <a>calculator</a>
                 </Link>
                 <Link href="/playground/gameoflife">
-                  <a className="gameoflife">Game of Life</a>
+                  <a className="gameoflife">
+                    Game of Life
+                    
+                  </a>
                 </Link>
               </div>
             </div>

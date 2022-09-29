@@ -5,6 +5,11 @@ export const GlobalStyles = createGlobalStyle`
     background: ${({ theme }) => theme.body};
     color: ${({ theme }) => theme.text};
   }
+  .H_main_wrap{
+    .H_wrap{
+      border-color:${({ theme }) => theme.borrdercolor};
+    }
+  }
   .playground_btn{
     display: flex;
     flex-direction: row;

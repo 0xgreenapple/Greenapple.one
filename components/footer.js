@@ -1,15 +1,10 @@
 import Link from "next/link";
 
-export default function footer(){
+export default function Footer(){
     return (
       <div className="container">
-        <div className="buttons">
-          <Link href="/">
-            <a className="footbtm">home</a>
-          </Link>
-          <Link href="/playground">
-            <a className="playground">playground</a>
-          </Link>
+        <div className="footerwrap">
+          <p className="credit">© greenapple 2022</p>
         </div>
       </div>
     );

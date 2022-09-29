@@ -1,13 +1,23 @@
 @import url('https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@300;400;500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap');
 @import 'scss-reset/_reset.scss';
 
 body {
-  font-family: 'Roboto Slab', serif;
+  font-family: 'Space Grotesk',
+    sans-serif;
   background-color: #BADFC0;
   margin: 0;
   transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
 }
-
+:root {
+  --blue: #8094FF;
+  --white: #FFFFFF;
+  --dark: #18191F;
+  --yellow: #FFD465;
+  --cyan: #61E4C5;
+  --gray: #474A57;
+  --pink: #FF89BB;
+}
 *,
 *:after,
 *:before {
@@ -72,7 +82,7 @@ label {
 }
 
 .content-wrap {
-  min-height: 90vh;
+  min-height: 80vh;
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -89,7 +99,7 @@ label {
     }
 
     h1 {
-      font-size: 100px;
+      font-size: 90px;
       font-weight: 400;
       line-height: 100%;
 
@@ -124,29 +134,29 @@ label {
     }
 
     a {
-      padding: 16px 29px;
+      padding: 11px 20px;
       border-color: black;
       border: 2px solid black;
-      border-radius: 20px;
+      border-radius:10px;
       font-size: 20px;
       line-height: 29px;
       font-style: normal;
-      font-weight: 600;
-      background-color: #61C577;
+      font-weight: bold;
+      background-color: var(--cyan);
       text-decoration: none;
       color: #000;
-      box-shadow: 4px 4px 0px #000000;
+      // box-shadow: 4px 4px 0px #000000;
       transition: all 0.3s ease-in-out 0s, visibility 0s linear 0.3s, z-index 0s linear 0.01s;
 
 
 
       &:hover {
-        box-shadow: rgb(0 0 0) 1px 1px 0px;
+        box-shadow: 3px 3px 0px black;
       }
 
       &.discord {
         margin-left: 30px;
-        background-color: #79B5E1;
+        background-color: var(--blue);
 
         @media screen and (max-width: 768px) {
           margin: 0;
@@ -156,7 +166,7 @@ label {
 
       &.instagram {
         margin-left: 30px;
-        background-color: #DA9FD7;
+        background-color:var(--pink);
 
         @media screen and (max-width: 768px) {
           margin: 0;
@@ -366,6 +376,7 @@ label {
       
       background-color:#ECB831 ;
       text-decoration: none;
+    
       color: #000;
       box-shadow: 4px 4px 0px #000000;
       margin-top: 40px;
@@ -373,6 +384,25 @@ label {
       &.gameoflife{
         background-color: rgb(211, 74, 74);
         color: white;
+        background-image: url('/images/gameoflife.gif');
+        background-repeat: no-repeat;
+          background-size: cover;
+          background-position: center;
+          
+          &::before{
+            content: "";
+              border-radius: 16px;
+              display: block;
+              position: absolute;
+              z-index: -1;
+              inset: -2px;
+              opacity: 1;
+              transform: scale(1);
+              backdrop-filter: blur(4px);
+          }
+          img{
+            filter: blur(8px);
+          }
       }
         @media screen and (max-width: 768px) {
           margin: 0;
@@ -469,27 +499,145 @@ label {
 
   #game_window{
     margin-bottom: 20px;
-    background-color: #000;
+    background-color: #181B17;
     border-radius: 25px;
     border: 20px solid rgb(26, 117, 255);
     box-shadow: 10px 10px 0 black;
   }
+            .buttons {
+              @media screen and (max-width: 768px) {
+                flex-direction: column !important;
+                .a{
+                  margin: 8px;
+                }
+              }
+              
+              a {
+                margin: 16px !important;
+              }
+            }
   .game_w{
     background-color: blue;
    
-    
+
   }
-    .buttons {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-      
-    }
+
   
   .gamebutton {
       background-color: black;
       color: white;
       border-radius: 5px;
       cursor: pointer;
+      margin: 24px;
+      min-width: 120px;
+      text-align: center;
+      
+    
     }
 }
+
+//header
+.H_main_wrap{
+  margin-top: 40px;
+
+  .H_wrap{
+    background-color: #18191F;
+    color: white;
+    border-radius: 20px;
+    padding: 25px;
+    border: 2px solid black;
+
+    .meta_wrap{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-direction: row;
+      transition: all ease 600ms ;
+
+      .button_wrapper{
+        display: flex;
+        justify-content: space-around;
+        
+        .theme_wrapper{
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+          margin-left: 10px;
+          border-radius: 7px;
+          background: linear-gradient(90deg, #FF8383 0%, #F8CE64 33.48%, #C8F864 66.96%, #64F8EF 100.44%);          
+          color: #000000;
+          font-weight: bold;
+          padding: 5px;
+          border: 2px solid black;
+          text-decoration: none;
+
+          cursor: pointer;
+            li{
+              display: block;
+              visibility: hidden;
+              opacity: 0;
+              background: linear-gradient(90deg, #FF8383 0%, #F8CE64 33.48%, #C8F864 66.96%, #64F8EF 100.44%);
+              transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+                height: 0;
+                width: 0;
+              &.white{
+                background: var(--white);
+              }
+              &.dark{
+                background: var(--dark);
+              }
+              &.light{
+                background: var(--yellow);
+              }
+              &.blue{
+                background: var(--blue);
+              }
+              &.cyan{
+                background: var(--cyan);
+              }
+              &.lightdark{
+                background: var(--gray);
+              }
+              &.pink{
+                background: var(--pink);
+              }
+            }
+            &:hover{
+              li{
+                margin-right: 10px;
+                visibility: visible;
+                opacity: 1;
+                height: 18px;
+                width: 18px;
+                border-radius: 7px;
+                border: 2px solid black;
+              }
+            }
+        }
+        
+        a{
+          margin-left: 10px;
+          border-radius: 7px;
+          background: linear-gradient(90deg, #FF8383 0%, #F8CE64 33.48%, #C8F864 66.96%, #64F8EF 100.44%);
+          color: #000000;
+          font-weight: bold;
+          padding: 5px;
+          border: 2px solid black;
+          text-decoration: none;
+          &.home{
+           background:  linear-gradient(90deg, #64F8EF 0%, #648DF8 100.44%);
+          }
+          &.playground{
+           background: linear-gradient(90deg, #648DF8 0%, #D16FFF 100.44%);
+          }
+          &.links {
+            background: linear-gradient(90deg, #F36FFF 0%, #F89964 100.44%);
+          }
+          
+        }
+       
+      }
+    }
+  }
+}
+

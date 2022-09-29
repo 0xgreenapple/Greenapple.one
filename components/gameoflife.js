@@ -65,13 +65,21 @@ function check_neighbor(array, oldarray, pos_x, pos_y) {
   }
 }
 
-function getValus(rn) {
+function getValus(rn, noise) {
   let array = [];
+
   if (rn) {
     for (let i = 0; i < boxheight; i++) {
       array.push([0]);
       for (let j = 0; j < boxwidth; j++) {
-        array[i][j] = Math.floor(Math.random() * 2);
+        if (!noise){
+            array[i][j] = Math.floor(Math.random() * 2);  
+        }else{
+          if(i == j){
+            array[i][j] = 1;  
+          }
+        }
+        
       }
     }
   } else {
@@ -91,6 +99,9 @@ export default function gameoflife() {
   let temparray = getValus();
   let isrunning = false;
   let paused = false;
+  let noise = false;
+  let element_size = 10;
+  let speed = 10;
 
   function reset(array, temparray) {
     array = getValus(true);
@@ -113,26 +124,55 @@ export default function gameoflife() {
 
     for (let i = 0; i < boxheight; i++) {
       for (let j = 0; j < boxwidth; j++) {
-        temparray[i][j] = array[i][j];
+        if (!noise){
+          temparray[i][j] = array[i][j];
+        }else{
+          array[i][j] = array[i][j];
+        }
+        
       }
     }
+    context.lineWidth = .5;
+    context.strokeStyle = "#94A780";
+    
     for (let i = 0; i < boxheight; i++) {
       for (let j = 0; j < boxwidth; j++) {
         if (array[i][j] == 1) {
-          context.fillStyle = "white";
-          context.fillRect(10 * i, 10 * j, 10, 10);
+          context.beginPath();
+
+          
+          context.arc(10 * i, 10 * j, 5, 0, 2 * Math.PI);
+          context.fillStyle = "#ABB79E";
+          // context.fillRect(10 * i, 10 * j, 10, 10);
+
+          context.fill();
+          context.stroke();
+
+          // context.strokeRect(10 * i, 10 * j, 10, 10);
         } else if (array[i][j] == 0) {
-          context.fillStyle = "black";
-          context.fillRect(10 * i, 10 * j, 10, 10);
+          // context.beginPath();
+          context.strokeStyle = "#181B17";
+           context.fillStyle = "#181B17";
+
+          // context.fillRect(10 * i, 10 * j, 10, 10);
+          // context.arc(10 * i, 10 * j, 10,  0, 2 * Math.PI);
+          context.strokeRect(10 * i, 10 * j, 10, 10);
         }
         if (!paused) {
-          check_neighbor(array, temparray, i, j);
+          !noise
+            ? check_neighbor(array, temparray, i, j)
+            : check_neighbor(array, array, i, j);
         }
       }
     }
+
     for (let i = 0; i < boxheight; i++) {
       for (let j = 0; j < boxwidth; j++) {
-        array[i][j] = temparray[i][j];
+         if (!noise){
+            array[i][j] = temparray[i][j];
+          }else{
+            array[i][j] = array[i][j];
+          }
       }
     }
 
@@ -140,10 +180,12 @@ export default function gameoflife() {
 
 setTimeout(() => {
   requestAnimationFrame(init);
-}, 1000 / 10);  }
+}, 1000 / speed);  }
 
   function clear(context, canvas) {
-    context.fillStyle = "black";
+    
+    context.fillStyle = "#181B17";
+    // canvas.create_rectangle(20, 20, 1, 1, (outline = "red"));
     context.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
   }
 
@@ -184,6 +226,14 @@ setTimeout(() => {
               }}
             >
               reset
+            </a>
+            <a
+              className="gamebutton"
+              onClick={() => {
+                noise ? (noise = false) : (noise = true);
+              }}
+            >
+              noise
             </a>
           </div>
         </div>

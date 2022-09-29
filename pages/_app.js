@@ -8,12 +8,16 @@ import {
   redTheme,
   yellowTheme,
   pinkTheme,
+  cyanTheme,
+  lightdarkTheme,
+  whiteTheme
 } from "../ThemeConfig"; 
 import { ThemeProvider } from "styled-components";
 import { GlobalStyles } from "../styles/GlobalStyles";
 import Link from "next/link";
 import Seo from "../components/Seo";
 import { GoogleAnalytics } from "nextjs-google-analytics";
+import Header from "../components/header";
 
 
 function getThemeType(theme) {
@@ -25,6 +29,35 @@ function getThemeType(theme) {
     return darkTheme
   }
 }
+export function toggleTheme(col, setTheme) {
+     switch (col) {
+       case "dark":
+         setTheme(darkTheme);
+         break;
+       case "cyan":
+         setTheme(cyanTheme);
+         break;
+       case "blue":
+         setTheme(blueTheme);
+         break;
+       case "lightdark":
+         setTheme(lightdarkTheme);
+         break;
+       case "pink":
+         setTheme(pinkTheme);
+         break;
+       case "white":
+         setTheme(whiteTheme);
+         break;
+       case "light":
+        setTheme(lightTheme);
+        break
+       default:
+         setTheme(lightTheme);
+         break;
+     }
+     // theme == 'light' ? setTheme('dark') : setTheme('light')
+   };
 function MyApp({ Component, pageProps }) {
   // const [theme, setTheme] = useState("light");
   const [theme, setTheme] = useState(lightTheme);
@@ -35,39 +68,15 @@ function MyApp({ Component, pageProps }) {
     }
   }, []);
   
-  const toggleTheme = (col) => {
-    switch (col) {
-      case "dark":
-        setTheme(darkTheme);
-        break;
-      case "red":
-        setTheme(redTheme);
-        break;
-      case "blue":
-        setTheme(blueTheme);
-        break;
-      case "yellow":
-        setTheme(yellowTheme);
-        break;
-      case "pink":
-        setTheme(pinkTheme);
-        break;
-      case "light":
-      default:
-        setTheme(lightTheme);
-        break;
-    }
-    // theme == 'light' ? setTheme('dark') : setTheme('light')
-  };
+   
 
   return (
     <>
       <GoogleAnalytics />
       <ThemeProvider theme={theme}>
         <GlobalStyles />
-
         <Seo />
-        <div className="playground_btn container">
+        {/* <div className="playground_btn container">
           <div className="themeselector">
             <div className="activecolor">
               <h4>colour</h4>
@@ -75,37 +84,37 @@ function MyApp({ Component, pageProps }) {
                 <button
                   className="light"
                   onClick={() => {
-                    toggleTheme("light");
+                    toggleTheme("light",setTheme);
                   }}
                 ></button>
                 <button
                   className="dark"
                   onClick={() => {
-                    toggleTheme("dark");
+                    toggleTheme("dark", setTheme);
                   }}
                 ></button>
                 <button
                   className="red"
                   onClick={() => {
-                    toggleTheme("red");
+                    toggleTheme("red", setTheme);
                   }}
                 ></button>
                 <button
                   className="blue"
                   onClick={() => {
-                    toggleTheme("blue");
+                    toggleTheme("blue", setTheme);
                   }}
                 ></button>
                 <button
                   className="yellow"
                   onClick={() => {
-                    toggleTheme("yellow");
+                    toggleTheme("yellow", setTheme);
                   }}
                 ></button>
                 <button
                   className="pink"
                   onClick={() => {
-                    toggleTheme("pink");
+                    toggleTheme("pink", setTheme);
                   }}
                 ></button>
               </div>
@@ -118,8 +127,8 @@ function MyApp({ Component, pageProps }) {
           <Link href="/">
             <a className="plbtn">home</a>
           </Link>
-        </div>
-
+        </div> */}
+        <Header setTheme = {setTheme}/>
         <Component {...pageProps} />
       </ThemeProvider>
     </>

@@ -1,13 +1,13 @@
 import Head from 'next/head';
+import Landing from "../components/Landing";
+import Footer from "../components/footer";
 
-
-import Landing from '../components/Landing';
+//main page
 export default function Home() {
   return (
     <section>
-      
-
       <Landing />
+      <Footer />
     </section>
   );
 }
