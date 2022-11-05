@@ -1,14 +1,15 @@
 import Home from "../pages";
 
+// landing component
 export default function Landing() {
     return (
-      <div className="main">
+      <section className="landing_section">
         <div className="container">
           <div className="content-wrap">
             <div className="text">
               <h3 className="typing">Hi! i'm</h3>
               <h1>
-                green <span> apple</span>
+                green <span>apple</span>
               </h1>
               <p>
                 I enjoy playing games, making 3D stuff and coding in my spare
@@ -31,7 +32,7 @@ export default function Landing() {
             </div>
           </div>
         </div>
-      </div>
+      </section>
       
     );
 }

@@ -8,6 +8,7 @@ export default function playground() {
   return (
     <>
       <section>
+      
         <div className="container">
           <div className="wrapper">
             <div className="wrap-head">
@@ -16,14 +17,11 @@ export default function playground() {
 
             <div className="p-menu-wrap">
               <div className="p-menu">
-                <Link href="/playground/calculator">
-                  <a>calculator</a>
+                <Link href="/playground/calculator" passHref>
+                  calculator
                 </Link>
-                <Link href="/playground/gameoflife">
-                  <a className="gameoflife">
-                    Game of Life
-                    
-                  </a>
+                <Link className="gameoflife" href="/playground/gameoflife" passHref>
+                 Game of Life
                 </Link>
               </div>
             </div>

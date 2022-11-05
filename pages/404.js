@@ -3,10 +3,9 @@ import Link from "next/link";
 
 import Landing from "../components/Landing";
 import Draggable from "react-draggable";
+
+// called when a page not found
 export default function custom404() {
-
-
-
   return (
     <section>
       <div className="mian">
@@ -16,8 +15,8 @@ export default function custom404() {
               <h1 className="404">404</h1>
             </Draggable>
             <div className="buttons">
-              <Link href="/">
-                <a className="footbtm">home</a>
+              <Link className="footbtm" href="/" passHref>
+                home
               </Link>
             </div>
             <div></div>

@@ -12,13 +12,13 @@ import {
   lightdarkTheme,
   whiteTheme
 } from "../ThemeConfig"; 
-import { ThemeProvider } from "styled-components";
+import { ThemeProvider,ThemeUpdateContext,ThemeContext } from "styled-components";
 import { GlobalStyles } from "../styles/GlobalStyles";
 import Link from "next/link";
 import Seo from "../components/Seo";
 import { GoogleAnalytics } from "nextjs-google-analytics";
 import Header from "../components/header";
-
+import {useThemeState} from "../components/toggletheme";
 
 function getThemeType(theme) {
   if (theme == 'light'){
@@ -60,7 +60,7 @@ export function toggleTheme(col, setTheme) {
    };
 function MyApp({ Component, pageProps }) {
   // const [theme, setTheme] = useState("light");
-  const [theme, setTheme] = useState(lightTheme);
+  const [theme, setTheme] = useThemeState(lightTheme);
   useEffect(() => {
     if (typeof window !== "undefined") {
       const loader = document.getElementById("globalLoader");
@@ -74,62 +74,9 @@ function MyApp({ Component, pageProps }) {
     <>
       <GoogleAnalytics />
       <ThemeProvider theme={theme}>
-        <GlobalStyles />
-        <Seo />
-        {/* <div className="playground_btn container">
-          <div className="themeselector">
-            <div className="activecolor">
-              <h4>colour</h4>
-              <div className="btngroup">
-                <button
-                  className="light"
-                  onClick={() => {
-                    toggleTheme("light",setTheme);
-                  }}
-                ></button>
-                <button
-                  className="dark"
-                  onClick={() => {
-                    toggleTheme("dark", setTheme);
-                  }}
-                ></button>
-                <button
-                  className="red"
-                  onClick={() => {
-                    toggleTheme("red", setTheme);
-                  }}
-                ></button>
-                <button
-                  className="blue"
-                  onClick={() => {
-                    toggleTheme("blue", setTheme);
-                  }}
-                ></button>
-                <button
-                  className="yellow"
-                  onClick={() => {
-                    toggleTheme("yellow", setTheme);
-                  }}
-                ></button>
-                <button
-                  className="pink"
-                  onClick={() => {
-                    toggleTheme("pink", setTheme);
-                  }}
-                ></button>
-              </div>
-            </div>
-          </div>
-
-          <Link href="/playground">
-            <a className="plbtn">playground</a>
-          </Link>
-          <Link href="/">
-            <a className="plbtn">home</a>
-          </Link>
-        </div> */}
-        <Header setTheme = {setTheme}/>
-        <Component {...pageProps} />
+          <GlobalStyles />
+          <Seo />
+          <Component setTheme = {setTheme} {...pageProps} />
       </ThemeProvider>
     </>
   );

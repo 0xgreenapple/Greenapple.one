@@ -1,7 +1,8 @@
 import Calc from "../../components/calc";
 import Footer from "../../components/footer";
 
-export default function playground() {
+//calculator page
+export default function calculator() {
   return (
     <>
       <section>

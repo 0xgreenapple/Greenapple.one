@@ -1,0 +1,35 @@
+{
+    "links":[
+        {
+            "name":"instagram",
+            "link":"https://instagram.com/0xgreenapple",
+            "logo":"/images/instagram.svg",
+            "theme":{
+                "mode":"dark",
+                "color":"#EA7BF3",
+                "logo_theme": "dark"
+            }
+        },
+         {
+            "name":"github",
+            "link":"https://github.com/xgreenapple",
+            "logo":"/images/github.svg",
+             "theme":{
+                "mode":"light",
+                "color":"#18191F",
+                "logo_theme": "light"
+            }
+        },
+        {
+            "name":"twitter",
+            "link":"https://twitter.com/0xgreenapple",
+            "logo":"/images/twitter.svg",
+             "theme":{
+                "mode":"light",
+                "color":"#4C6DDE",
+                "logo_theme": "light"
+            }
+        }
+         
+    ]
+}

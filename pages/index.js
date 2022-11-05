@@ -1,13 +1,14 @@
 import Head from 'next/head';
 import Landing from "../components/Landing";
 import Footer from "../components/footer";
-
-//main page
-export default function Home() {
+import Header from '../components/header';
+//landing page
+export default function Home({ setTheme }) {
   return (
-    <section>
+    <main className="main_section">
+      <Header setTheme={setTheme} />
       <Landing />
-      <Footer />
-    </section>
+      <Footer compacted = {true} />
+    </main>
   );
 }
