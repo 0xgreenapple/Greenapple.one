@@ -30,26 +30,8 @@ class MyDocument extends Document {
       sheet.seal();
     }
   }
-  render() {
-    return (
-      <Html>
-        <Head />
-        <head>
-          <style>{loader}</style>
-        </head>
-        <body>
-          <div id={"globalLoader"}>
-            <div className="loader">
-              <div />
-              <div />
-            </div>
-          </div>
-          <Main />
-          <NextScript />
-        </body>
-      </Html>
-    );
-  }
+ 
+  
 }
 
 export default MyDocument;

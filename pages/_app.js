@@ -1,6 +1,8 @@
 import "../styles/main.scss";
 import { useState ,useEffect} from "react";
 import Head from "next/head";
+import React from "react";
+
 import {
   lightTheme,
   darkTheme,
@@ -12,6 +14,7 @@ import {
   lightdarkTheme,
   whiteTheme
 } from "../ThemeConfig"; 
+import Router from "next/router";
 import { ThemeProvider,ThemeUpdateContext,ThemeContext } from "styled-components";
 import { GlobalStyles } from "../styles/GlobalStyles";
 import Link from "next/link";
@@ -19,7 +22,8 @@ import Seo from "../components/Seo";
 import { GoogleAnalytics } from "nextjs-google-analytics";
 import Header from "../components/header";
 import {useThemeState} from "../components/toggletheme";
-
+import loader from "../components/loader";
+import { useRouter } from "next/router";
 function getThemeType(theme) {
   if (theme == 'light'){
     return lightTheme
@@ -29,55 +33,90 @@ function getThemeType(theme) {
     return darkTheme
   }
 }
+const MemoizedThemeProvider = React.memo(
+  ({ children, theme }) => (
+    <ThemeProvider theme={theme}>{children}</ThemeProvider>
+  ),
+  (prevProps, nextProps) => prevProps.theme === nextProps.theme
+);
 export function toggleTheme(col, setTheme) {
+    let theme;
      switch (col) {
        case "dark":
-         setTheme(darkTheme);
+         theme = darkTheme;
          break;
        case "cyan":
-         setTheme(cyanTheme);
+         theme =cyanTheme;
          break;
        case "blue":
-         setTheme(blueTheme);
+         theme =blueTheme;
          break;
        case "lightdark":
-         setTheme(lightdarkTheme);
+         theme =lightdarkTheme;
          break;
        case "pink":
-         setTheme(pinkTheme);
+         theme = pinkTheme;
          break;
        case "white":
-         setTheme(whiteTheme);
+         theme = whiteTheme;
          break;
        case "light":
-        setTheme(lightTheme);
+        theme = lightTheme;
         break
        default:
-         setTheme(lightTheme);
+         theme = lightTheme;
          break;
+
      }
      // theme == 'light' ? setTheme('dark') : setTheme('light')
+    setTheme(theme);
+    window.localStorage.setItem("theme", theme);
+
    };
 function MyApp({ Component, pageProps }) {
   // const [theme, setTheme] = useState("light");
-  const [theme, setTheme] = useThemeState(lightTheme);
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      const loader = document.getElementById("globalLoader");
-      if (loader) loader.style.display = "none";
-    }
-  }, []);
-  
+   let default_theme = null;
+  const router = useRouter();
+
+  const [loading, setLoading] = useState(false);
+  const [theme, setTheme] =
+    useThemeState(darkTheme
+     );
+    
    
+  useEffect(() => {
+        Router.events.on("routeChangeStart", () => setLoading(true));
+        Router.events.on("routeChangeComplete", () => setLoading(false));
+        Router.events.on("routeChangeError", () => setLoading(false));
+        return () => {
+          Router.events.off("routeChangeStart", () => setLoading(true));
+          Router.events.off("routeChangeComplete", () => setLoading(false));
+          Router.events.off("routeChangeError", () => setLoading(false));
+        };
+
+
+  }, [Router.events]);
+  if (loading){
+    return(
+        <>
+          <div id="globalLoader">
+            <div className="loader">
+              <div />
+              <div />
+            </div>
+          </div>
+        </>)
+  }
+ 
 
   return (
     <>
       <GoogleAnalytics />
-      <ThemeProvider theme={theme}>
-          <GlobalStyles />
-          <Seo />
-          <Component setTheme = {setTheme} {...pageProps} />
-      </ThemeProvider>
+      <MemoizedThemeProvider theme={theme}>
+        <GlobalStyles />
+        <Seo />
+        <Component setTheme={setTheme} {...pageProps} />
+      </MemoizedThemeProvider>
     </>
   );
 }

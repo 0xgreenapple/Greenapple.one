@@ -22,13 +22,14 @@ export async function getStaticProps() {
 export default function links({ alllinksdata,setTheme }) {
   return (
     <main className="main_section link_main">
-      <div className="head_ection">
+      <div className="head_section">
         <Header setTheme={setTheme} />
         <section className="link_section">
-          <div className="container">
+          <div className="container link_container">
             <div className="link_wrapper">
               <header className="link_head">
                 <h2>links</h2>
+                <p> my social links </p>
                 <div className="link_nav">
                   <div className="img_wrap">
                     {alllinksdata.map(({ theme, logo, link }) => (
@@ -82,6 +83,7 @@ const Links = styled.li`
 
   :hover {
     box-shadow: 3px 3px 0px #000000;
+    transform: scale(1.01);
   }
 `;
 const Wrapper = styled.div`

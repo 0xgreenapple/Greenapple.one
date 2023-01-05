@@ -8,7 +8,7 @@ export default function Link({ alllinksdata }) {
       <div className="container">
         <div className="link_wrapper">
           <header className="link_head">
-            <h2>links</h2>
+            <h2>kkk</h2>
             <div className="link_nav">
               <div className="img_wrap">
                 {alllinksdata.map(({ theme, logo, link }) => (
@@ -50,7 +50,7 @@ export default function Link({ alllinksdata }) {
 const Links = styled.li`
   background: ${(props) => props.theme.color};
   color: ${(props) => (props.theme.mode == "dark" ? "black" : "white")};
-  border: 2px solid black;
+  border: 1px solid black;
   border-radius: 15px;
   font-family: "Space Mono", monospace;
   font-weight: 700;

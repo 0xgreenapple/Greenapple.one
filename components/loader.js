@@ -2,6 +2,7 @@ export default `
 body{
 display: block;
 }
+
 #globalLoader{
     position: fixed;
     z-index: 1700;

@@ -4,12 +4,12 @@ import styled from "styled-components";
 export default function Footer({compacted}){
     return (
       <section className="fotter_section">
-        <div className="container">
+        <div className="container footer">
           {!compacted ? (
             <Wrapper compact>
                 <LeftWrap>©greenapple 2022</LeftWrap>
                 <RightWrap>
-                  <a>say hello</a>
+                  <a href='mailto:0xgreenapple@gmail.com?subject="saying hello"'>say hello</a>
                 </RightWrap>
             </Wrapper>
           ) : (
@@ -29,13 +29,24 @@ const Wrapper = styled.div`
   align-items: center;
   border: 2px solid black;
   border-bottom: 0;
+  transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+  div {
+    transition: all 250ms cubic-bezier(0.02, 0.01, 0.47, 1);
+  }
+  a {
+    color: var(--yellow);
+    text-decoration: none;
+  }
+  &:hover {
+    padding-bottom:10px;
+  }
 `;
 
 const LeftWrap = styled.div`
-color: white;
-display: flex;
-margin: 20px;
-font-size: 18px;
+  color: white;
+  display: flex;
+  margin: 20px;
+  font-size: 18px;
 `;
 const RightWrap = styled.div`
   display: flex;
@@ -43,6 +54,7 @@ const RightWrap = styled.div`
   font-size: 24px;
   font-weight: bold;
   color: var(--yellow);
+  text-decoration: none;
 `;
 
 

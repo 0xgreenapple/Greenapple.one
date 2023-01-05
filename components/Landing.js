@@ -12,8 +12,8 @@ export default function Landing() {
                 green <span>apple</span>
               </h1>
               <p>
-                I enjoy playing games, making 3D stuff and coding in my spare
-                time
+                I'm the guy who loves coding, playing games, and creating 3D
+                stuffs in my spare time.
               </p>
             </div>
             <div className="button">
@@ -24,15 +24,23 @@ export default function Landing() {
               >
                 twitter
               </a>
-              <a href="https://discord.gg/wC37kY3qwH" target={"_blank"} className="discord">
+              <a
+                href="https://discord.gg/wC37kY3qwH"
+                target={"_blank"}
+                className="discord"
+              >
                 discord
               </a>
-              <a href= "https://instagram.com/0xgreenapple" target={"_blank"} 
-              className="instagram">instagram</a>
+              <a
+                href="https://instagram.com/0xgreenapple"
+                target={"_blank"}
+                className="instagram"
+              >
+                instagram
+              </a>
             </div>
           </div>
         </div>
       </section>
-      
     );
 }

@@ -93,199 +93,200 @@ export default function calc() {
   };
 
   return (
-        <div className="container">
-          <div className="calc-wrap">
-            <div className="calc">
-              <input disabled id="screen" className="screen" value="0" />
-              <div className="btnwrap">
-                <div className="buttons">
-                  <div className="left-btn">
-                    <ul className="numbers">
-                      <li>
-                        <button
-                          className="clcbtn1"
-                          onClick={() => {
-                            changevalue(1);
-                          }}
-                        >
-                          1
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className="clcbtn1"
-                          onClick={() => {
-                            changevalue(2);
-                          }}
-                        >
-                          2
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className="clcbtn1"
-                          onClick={() => {
-                            changevalue(3);
-                          }}
-                        >
-                          3
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className="clcbtn1"
-                          onClick={() => {
-                            changevalue(4);
-                          }}
-                        >
-                          4
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className="clcbtn1"
-                          onClick={() => {
-                            changevalue(5);
-                          }}
-                        >
-                          5
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className="clcbtn1"
-                          onClick={() => {
-                            changevalue(6);
-                          }}
-                        >
-                          6
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className="clcbtn1"
-                          onClick={() => {
-                            changevalue(7);
-                          }}
-                        >
-                          7
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className="clcbtn1"
-                          onClick={() => {
-                            changevalue(8);
-                          }}
-                        >
-                          8
-                        </button>
-                      </li>
-                      <li>
-                        <button
-                          className="clcbtn1"
-                          onClick={() => {
-                            changevalue(9);
-                          }}
-                        >
-                          9
-                        </button>
-                      </li>
-                    </ul>
-                    <div className="bottom-btn">
-                      <ul>
-                        <li>
-                          <button
-                            className="zero"
-                            onClick={() => {
-                              changevalue(0);
-                            }}
-                          >
-                            0
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            className="clcbtn1"
-                            onClick={() => {
-                              changevalue(".");
-                            }}
-                          >
-                            .
-                          </button>
-                        </li>
-                        <li>
-                          <button
-                            className="equal"
-                            onClick={() => {
-                              changevalue("=");
-                            }}
-                          >
-                            =
-                          </button>
-                        </li>
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-                <div className="right-btn">
-                  <ul className="oprators">
+    <section className="calc_section">
+      <div className="container">
+        <div className="calc-wrap">
+          <div className="calc">
+            <input disabled id="screen" className="screen" value="0" />
+            <div className="btnwrap">
+              <div className="buttons">
+                <div className="left-btn">
+                  <ul className="numbers">
                     <li>
                       <button
-                        className="ac"
+                        className="clcbtn1"
                         onClick={() => {
-                          changevalue("ac");
+                          changevalue(1);
                         }}
                       >
-                        AC
+                        1
                       </button>
                     </li>
                     <li>
                       <button
                         className="clcbtn1"
                         onClick={() => {
-                          changevalue("+");
+                          changevalue(2);
                         }}
                       >
-                        +
+                        2
                       </button>
                     </li>
                     <li>
                       <button
                         className="clcbtn1"
                         onClick={() => {
-                          changevalue("-");
+                          changevalue(3);
                         }}
                       >
-                        -
+                        3
                       </button>
                     </li>
                     <li>
                       <button
                         className="clcbtn1"
                         onClick={() => {
-                          changevalue("*");
+                          changevalue(4);
                         }}
                       >
-                        *
+                        4
                       </button>
                     </li>
                     <li>
                       <button
                         className="clcbtn1"
                         onClick={() => {
-                          changevalue("/");
+                          changevalue(5);
                         }}
                       >
-                        /
+                        5
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        className="clcbtn1"
+                        onClick={() => {
+                          changevalue(6);
+                        }}
+                      >
+                        6
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        className="clcbtn1"
+                        onClick={() => {
+                          changevalue(7);
+                        }}
+                      >
+                        7
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        className="clcbtn1"
+                        onClick={() => {
+                          changevalue(8);
+                        }}
+                      >
+                        8
+                      </button>
+                    </li>
+                    <li>
+                      <button
+                        className="clcbtn1"
+                        onClick={() => {
+                          changevalue(9);
+                        }}
+                      >
+                        9
                       </button>
                     </li>
                   </ul>
+                  <div className="bottom-btn">
+                    <ul>
+                      <li>
+                        <button
+                          className="zero"
+                          onClick={() => {
+                            changevalue(0);
+                          }}
+                        >
+                          0
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          className="clcbtn1"
+                          onClick={() => {
+                            changevalue(".");
+                          }}
+                        >
+                          .
+                        </button>
+                      </li>
+                      <li>
+                        <button
+                          className="equal"
+                          onClick={() => {
+                            changevalue("=");
+                          }}
+                        >
+                          =
+                        </button>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
+              </div>
+              <div className="right-btn">
+                <ul className="oprators">
+                  <li>
+                    <button
+                      className="ac"
+                      onClick={() => {
+                        changevalue("ac");
+                      }}
+                    >
+                      AC
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="clcbtn1"
+                      onClick={() => {
+                        changevalue("+");
+                      }}
+                    >
+                      +
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="clcbtn1"
+                      onClick={() => {
+                        changevalue("-");
+                      }}
+                    >
+                      -
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="clcbtn1"
+                      onClick={() => {
+                        changevalue("*");
+                      }}
+                    >
+                      *
+                    </button>
+                  </li>
+                  <li>
+                    <button
+                      className="clcbtn1"
+                      onClick={() => {
+                        changevalue("/");
+                      }}
+                    >
+                      /
+                    </button>
+                  </li>
+                </ul>
               </div>
             </div>
           </div>
-                        
         </div>
+      </div>
+    </section>
   );
 }

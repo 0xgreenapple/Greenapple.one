@@ -29,7 +29,28 @@
                 "color":"#4C6DDE",
                 "logo_theme": "light"
             }
+        },
+        {
+            "name":"discord",
+            "link":"https://twitter.com/0xgreenapple",
+            "logo":"/images/discord.svg",
+             "theme":{
+                "mode":"light",
+                "color":"#282b30",
+                "logo_theme": "light"
+            }
+        },
+        {
+            "name":"paypal",
+            "link":"https://paypal.me/0xgreenapple",
+            "logo":"/images/paypal.svg",
+             "theme":{
+                "mode":"light",
+                "color":"#406DD0",
+                "logo_theme": "light"
+            }
         }
+         
          
     ]
 }

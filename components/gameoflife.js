@@ -1,9 +1,10 @@
 import Head from "next/head";
 import { event } from "nextjs-google-analytics";
 import { useState, useEffect } from "react";
+import Footer from "./footer";
 
-const boxheight = 100;
-const boxwidth = 100;
+const boxheight = 200;
+const boxwidth = 200;
 
 function check_neighbor(array, oldarray, pos_x, pos_y) {
   let sum = 0;
@@ -138,25 +139,15 @@ export default function gameoflife() {
     for (let i = 0; i < boxheight; i++) {
       for (let j = 0; j < boxwidth; j++) {
         if (array[i][j] == 1) {
-          context.beginPath();
-
-          
-          context.arc(10 * i, 10 * j, 5, 0, 2 * Math.PI);
-          context.fillStyle = "#ABB79E";
-          // context.fillRect(10 * i, 10 * j, 10, 10);
-
-          context.fill();
-          context.stroke();
-
-          // context.strokeRect(10 * i, 10 * j, 10, 10);
-        } else if (array[i][j] == 0) {
+          context.strokeStyle = "#B5B4B4";
+          context.fillStyle = "#B5B4B4";
+          context.lineWidth = 1;
+          context.fillRect(5 * i, 5 * j, 5, 5);
+        } 
+        else if (array[i][j] == 0) {
           // context.beginPath();
-          context.strokeStyle = "#181B17";
-           context.fillStyle = "#181B17";
-
-          // context.fillRect(10 * i, 10 * j, 10, 10);
-          // context.arc(10 * i, 10 * j, 10,  0, 2 * Math.PI);
-          context.strokeRect(10 * i, 10 * j, 10, 10);
+         context.fillStyle = "#484A47";
+         context.fillRect(5 * i, 5 * j, 5, 5);
         }
         if (!paused) {
           !noise
@@ -184,60 +175,64 @@ setTimeout(() => {
 
   function clear(context, canvas) {
     
-    context.fillStyle = "#181B17";
+    context.fillStyle = "#484A47";
     // canvas.create_rectangle(20, 20, 1, 1, (outline = "red"));
     context.fillRect(0, 0, canvas.clientWidth, canvas.clientHeight);
   }
 
   return (
-    <>
-      <div className="container">
-        <div className="game_w">
-          <div className="game">
-            <canvas id="game_window" width="800" height="600"></canvas>
-          </div>
+    
+        <section className="game_section">
+          <div className="container">
+            <div className="game_w">
+              <div className="game">
+                <canvas id="game_window" width="600" height="400"></canvas>
+              </div>
 
-          <div className="buttons">
-            <a
-              id="gamebutton"
-              className="gamebutton"
-              onClick={() => {
-                if (isrunning) {
-                  if (paused) {
-                    paused = false;
-                    document.getElementById("gamebutton").innerHTML = "pause";
-                  } else {
-                    paused = true;
-                    document.getElementById("gamebutton").innerHTML = "play";
-                  }
-                } else {
-                  init();
-                  isrunning = true;
-                }
-              }}
-            >
-              play
-            </a>
-            <a
-              className="gamebutton"
-              onClick={() => {
-                array = getValus(true);
-                temparray = getValus();
-              }}
-            >
-              reset
-            </a>
-            <a
-              className="gamebutton"
-              onClick={() => {
-                noise ? (noise = false) : (noise = true);
-              }}
-            >
-              noise
-            </a>
+              <div className="game_btn">
+                <a
+                  id="gamebutton"
+                  className="gamebutton green"
+                  onClick={() => {
+                    if (isrunning) {
+                      if (paused) {
+                        paused = false;
+                        document.getElementById("gamebutton").innerHTML =
+                          "pause";
+                      } else {
+                        paused = true;
+                        document.getElementById("gamebutton").innerHTML =
+                          "play";
+                      }
+                    } else {
+                      init();
+                      isrunning = true;
+                    }
+                  }}
+                >
+                  play
+                </a>
+                <a
+                  className="gamebutton red"
+                  onClick={() => {
+                    array = getValus(true);
+                    temparray = getValus();
+                  }}
+                >
+                  reset
+                </a>
+                <a
+                  className="gamebutton blue"
+                  onClick={() => {
+                    noise ? (noise = false) : (noise = true);
+                  }}
+                >
+                  noise
+                </a>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-    </>
+        </section>
+    
   );
 }
